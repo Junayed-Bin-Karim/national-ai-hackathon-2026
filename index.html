@@ -474,69 +474,145 @@
         </div>
     </section>
 
-   <section id="submission" class="py-5">
-        <div class="container">
-            <div class="glass-card border-primary position-relative overflow-hidden mb-5" data-aos="zoom-in">
+<style>
+    /* --- ULTRA PREMIUM BUTTONS & UI CSS --- */
+    
+    /* 1. The "Liquid White" Submit Button */
+    .btn-ultra-solid {
+        background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+        color: var(--primary);
+        border: none;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Shine Animation */
+    .btn-ultra-solid::before {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%; width: 100%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+        transition: 0.5s;
+        z-index: -1;
+    }
+    
+    .btn-ultra-solid:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 20px 50px rgba(99, 102, 241, 0.4); /* Glow color */
+        color: #000;
+    }
+    
+    .btn-ultra-solid:hover::before {
+        left: 100%; /* Swipe effect */
+    }
+
+    /* 2. The "Glass Glow" Demo Button */
+    .btn-ultra-outline {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+    }
+
+    .btn-ultra-outline:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: var(--accent);
+        color: var(--accent);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(6, 182, 212, 0.2); /* Cyan glow */
+    }
+
+    /* 3. The Vertical Process Line */
+    .step-connector {
+        position: absolute;
+        left: 20px; /* Aligns with center of 40px icon */
+        top: 20px;
+        bottom: 20px;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--primary), var(--warning), var(--success));
+        z-index: 0;
+        opacity: 0.3;
+    }
+</style>
+
+<section id="submission" class="py-5">
+    <div class="container">
+        <div class="glass-card border-primary position-relative overflow-hidden mb-5" data-aos="zoom-in" style="border: 1px solid rgba(99, 102, 241, 0.3);">
+            
+            <div style="position: absolute; top: -50px; right: -50px; width: 400px; height: 400px; background: var(--primary); filter: blur(100px); opacity: 0.2; z-index: 0; pointer-events: none;"></div>
+            
+            <div class="row align-items-center text-center text-md-start position-relative" style="z-index: 2;">
                 
-                <div style="position: absolute; top: -50px; right: -50px; width: 300px; height: 300px; background: var(--primary); filter: blur(80px); opacity: 0.25; z-index: 0; pointer-events: none;"></div>
-                
-                <div class="row align-items-center text-center text-md-start position-relative" style="z-index: 2;">
-                    <div class="col-md-6 mb-4 mb-md-0">
-                        <h2 class="text-white mb-2">
-                            <i class="fab fa-google-drive text-success me-2"></i>Submit Your Idea & Solution
-                        </h2>
-                        <div class="mt-3 ps-2">
-    <div class="d-flex align-items-center mb-3">
-        <div class="rounded-circle bg-primary bg-opacity-10 border border-primary border-opacity-25 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; min-width: 40px;">
-            <i class="fab fa-google-drive text-primary"></i>
-        </div>
-        <div>
-            <div class="text-secondary small fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 1px;">Step 01</div>
-            <div class="text-white">Upload <strong>PDF/PPTX</strong> to Google Drive.</div>
-        </div>
-    </div>
-
-    <div class="d-flex align-items-center mb-3">
-        <div class="rounded-circle bg-warning bg-opacity-10 border border-warning border-opacity-25 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; min-width: 40px;">
-            <i class="fas fa-globe text-warning"></i>
-        </div>
-        <div>
-            <div class="text-secondary small fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 1px;">Step 02</div>
-            <div class="text-white">Set Link Access: <span class="badge bg-warning text-dark">Anyone with the link</span></div>
-        </div>
-    </div>
-
-    <div class="d-flex align-items-center">
-        <div class="rounded-circle bg-success bg-opacity-10 border border-success border-opacity-25 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; min-width: 40px;">
-            <i class="fas fa-check-double text-success"></i>
-        </div>
-        <div>
-            <div class="text-secondary small fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 1px;">Step 03</div>
-            <div class="text-white">Click <strong>Submit</strong> & Paste the Link.</div>
-        </div>
-    </div>
-</div>
-                    </div>
-
-                    <div class="col-md-6 text-center text-md-end">
+                <div class="col-md-7 mb-5 mb-md-0">
+                    <h2 class="text-white mb-4 display-6 fw-bold">
+                        <i class="fab fa-google-drive text-success me-2"></i>Submit Your Solution
+                    </h2>
+                    
+                    <div class="mt-3 ps-2 position-relative">
                         
-                        <a href="demo-idea.html" target="_blank" class="btn btn-outline-light fw-bold rounded-pill px-4 py-3 shadow-lg me-2 mb-2 mb-md-0" style="transition: transform 0.3s ease; border-width: 2px;">
-                            <i class="fas fa-eye me-2"></i>View Demo
-                        </a>
+                        <div class="step-connector"></div>
 
-                        <a href="https://forms.gle/s1xRiZQMKaS1xbtB6" target="_blank" class="btn btn-light text-primary fw-bold rounded-pill px-5 py-3 shadow-lg mb-2 mb-md-0" style="transition: transform 0.3s ease; border: 2px solid white;">
-                            <i class="fas fa-paper-plane me-2"></i>Submit Link
-                        </a>
+                        <div class="d-flex align-items-center mb-4 position-relative" style="z-index: 1;">
+                            <div class="rounded-circle bg-dark border border-primary text-primary d-flex align-items-center justify-content-center shadow-lg me-3" style="width: 42px; height: 42px; min-width: 42px; box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);">
+                                <i class="fab fa-google-drive"></i>
+                            </div>
+                            <div>
+                                <div class="text-primary small fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 2px;">Step 01</div>
+                                <div class="text-white">Upload <strong>PDF/PPTX</strong> to Google Drive.</div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center mb-4 position-relative" style="z-index: 1;">
+                            <div class="rounded-circle bg-dark border border-warning text-warning d-flex align-items-center justify-content-center shadow-lg me-3" style="width: 42px; height: 42px; min-width: 42px; box-shadow: 0 0 15px rgba(251, 191, 36, 0.3);">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div>
+                                <div class="text-warning small fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 2px;">Step 02</div>
+                                <div class="text-white">Set Link Access: <span class="badge bg-warning text-dark rounded-pill">Anyone with the link</span></div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center position-relative" style="z-index: 1;">
+                            <div class="rounded-circle bg-dark border border-success text-success d-flex align-items-center justify-content-center shadow-lg me-3" style="width: 42px; height: 42px; min-width: 42px; box-shadow: 0 0 15px rgba(25, 135, 84, 0.3);">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <div class="text-success small fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 2px;">Step 03</div>
+                                <div class="text-white">Click <strong>Submit</strong> & Paste the Link.</div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
+
+                <div class="col-md-5 text-center text-md-end">
+                    
+                    <div class="d-flex flex-column flex-md-row justify-content-end gap-3 align-items-center">
+                        <a href="demo-idea.html" target="_blank" class="btn btn-ultra-outline fw-bold rounded-pill px-4 py-3 w-100 w-md-auto">
+                            <i class="fas fa-eye me-2"></i>View Demo
+                        </a>
+
+                        <a href="https://forms.gle/s1xRiZQMKaS1xbtB6" target="_blank" class="btn btn-ultra-solid fw-bold rounded-pill px-5 py-3 w-100 w-md-auto">
+                            <i class="fas fa-paper-plane me-2"></i>Submit Link
+                        </a>
+                    </div>
+                    
+                    <p class="text-muted small mt-3 fst-italic opacity-75">
+                        <i class="fas fa-lock me-1"></i> Secure Google Form Submission
+                    </p>
+
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
             
             
-        </div>
-    </section>
+     
 
     <section id="prizes" class="py-5" style="background: linear-gradient(180deg, transparent 0%, rgba(99, 102, 241, 0.05) 100%);">
         <div class="container py-5">
