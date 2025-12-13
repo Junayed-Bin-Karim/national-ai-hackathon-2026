@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangladesh National AI Hackathon 2026</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* --- ULTRA PREMIUM CSS OVERRIDES --- */
+        :root {
+            --bg-dark: #020617;
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --accent: #06b6d4;
+            --gold: #fbbf24;
+            --silver: #e2e8f0;
+            --bronze: #d97706;
+            --glass: rgba(30, 41, 59, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --text-main: #ffffff;
+            --text-sub: #cbd5e1;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.15), transparent 25%);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            color: #ffffff !important;
+        }
+
+        p, li { color: var(--text-sub); line-height: 1.6; font-size: 0.95rem; }
+        .text-muted { color: #94a3b8 !important; }
+
+        /* UTILITIES */
+        .text-gradient {
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* GLASS CARD */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: rgba(99, 102, 241, 0.8);
+        }
+
+        /* ROUNDS / PHASE CARDS */
+        .phase-card {
+            background: linear-gradient(160deg, rgba(30, 41, 59, 0.6) 0%, rgba(2, 6, 23, 0.9) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2rem;
+            height: 100%;
+        }
+        .phase-badge {
+            background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 50px;
+            font-size: 0.75rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.2);
+            display: inline-block; margin-bottom: 15px;
+        }
+
+        /* HERO & BUTTONS */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 80px; }
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1.1; margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .btn-glow {
+            background: linear-gradient(90deg, var(--primary), var(--secondary)); border: none; color: white !important;
+            padding: 12px 35px; font-size: 1rem; border-radius: 50px; font-weight: 600; text-decoration: none;
+            display: inline-block; transition: 0.3s;
+        }
+        .btn-glow:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(236, 72, 153, 0.5); }
+
+        .btn-outline-glow {
+            background: transparent; border: 2px solid var(--accent); color: var(--accent) !important;
+            padding: 10px 30px; font-size: 1rem; border-radius: 50px; font-weight: 600; text-decoration: none;
+            display: inline-block; transition: 0.3s;
+        }
+        .btn-outline-glow:hover { background: var(--accent); color: #000 !important; box-shadow: 0 0 20px var(--accent); }
+
+        /* LISTS */
+        .custom-list li { margin-bottom: 8px; position: relative; padding-left: 20px; }
+        .custom-list li::before { content: '•'; position: absolute; left: 0; color: var(--accent); }
+
+        /* PAYMENTS & COPY */
+        .payment-box {
+            background: rgba(2, 6, 23, 0.6); border: 1px solid var(--glass-border); border-radius: 12px;
+            padding: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;
+        }
+        .copy-btn {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: var(--accent);
+            padding: 5px 12px; border-radius: 8px; font-size: 0.8rem; cursor: pointer; transition: 0.3s;
+        }
+        .copy-btn:hover { background: var(--accent); color: white; }
+
+        /* TIMER & NAVBAR */
+        .timer-box { background: rgba(255,255,255,0.08); border: 1px solid var(--glass-border); padding: 15px; border-radius: 16px; min-width: 90px; }
+        .timer-val { font-size: 2rem; font-weight: 700; color: var(--accent); display: block; }
+        .timer-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #e2e8f0; }
+        .navbar { background: rgba(2, 6, 23, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); padding: 15px 0; }
+        .nav-link { color: #e2e8f0 !important; font-weight: 500; margin-left: 20px; transition: 0.3s; }
+        .nav-link:hover { color: var(--accent) !important; text-shadow: 0 0 10px var(--accent); }
+        .navbar-brand { font-weight: 700; font-family: 'Space Grotesk'; font-size: 1.5rem; color: white !important; }
+
+        /* FOOTER */
+        footer { background: #010409; position: relative; padding-top: 80px; padding-bottom: 40px; }
+        footer::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent); }
+        .social-icon { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; transition: 0.3s; margin-right: 10px; text-decoration: none; }
+        .social-icon:hover { background: var(--primary); color: white; }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .timer-box { min-width: 70px; padding: 10px; margin-bottom: 5px; }
+            .timer-val { font-size: 1.5rem; }
+            .phase-card, .glass-card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                AI HACKATHON <span style="color: var(--primary)">2026</span>
+            </a>
+            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#how-it-works">How It Works</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#register">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#submission">Submit</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#prizes">Prizes</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div data-aos="fade-up" data-aos-duration="1000">
+                <div class="mb-2 text-uppercase fw-bold text-silver fs-6" style="letter-spacing: 3px;">
+                    Presented By <span class="text-gradient">Ideal Tech Ltd</span>
+                </div>
+
+                <div class="mb-4">
+                    <span class="badge rounded-pill border border-success text-success px-3 py-2 me-2" style="background: rgba(25, 135, 84, 0.1);">
+                        <i class="fas fa-globe me-2"></i>FULL ONLINE EVENT
+                    </span>
+                </div>
+                
+                <h1 class="hero-title">Bangladesh National<br>AI Hackathon 2026</h1>
+                <p class="hero-tag">Prestige. Innovation. National Impact.</p>
+                
+                <div class="d-flex justify-content-center flex-wrap gap-2 mb-5">
+                    <div class="timer-box"><span id="days" class="timer-val">00</span><span class="timer-label">Days</span></div>
+                    <div class="timer-box"><span id="hours" class="timer-val">00</span><span class="timer-label">Hours</span></div>
+                    <div class="timer-box"><span id="minutes" class="timer-val">00</span><span class="timer-label">Min</span></div>
+                    <div class="timer-box"><span id="seconds" class="timer-val">00</span><span class="timer-label">Sec</span></div>
+                </div>
+
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="#register" class="btn-glow">Register Now</a>
+                    <a href="rulebook.html"class="btn-outline-glow"><i class="fas fa-book me-2"></i>Rulebook</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+<section id="dates" class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-4 fw-bold text-white"><i class="fas fa-calendar-alt text-accent me-3"></i>Important Dates</h2>
+                <p class="text-silver">Mark your calendars. Don't miss a deadline.</p>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card text-center position-relative overflow-hidden">
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <span class="display-4 fw-bold text-white">01</span>
+                            <div class="text-start ms-3 lh-1">
+                                <span class="d-block text-uppercase text-secondary fw-bold small">January</span>
+                                <span class="d-block text-white fw-bold">2026</span>
+                            </div>
+                        </div>
+                        <h5 class="text-white"><i class="fas fa-flag-checkered text-success me-2"></i>Registration Opens</h5>
+                        <p class="small text-muted mb-0">Portal live for team creation.</p>
+                    </div>
+                </div>
+
+                
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="glass-card text-center position-relative overflow-hidden border-danger" style="background: linear-gradient(145deg, rgba(220, 53, 69, 0.1), rgba(2, 6, 23, 0.8));">
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <span class="display-4 fw-bold text-danger">25</span>
+                            <div class="text-start ms-3 lh-1">
+                                <span class="d-block text-uppercase text-secondary fw-bold small">January</span>
+                                <span class="d-block text-white fw-bold">2026</span>
+                            </div>
+                        </div>
+                        <h5 class="text-white"><i class="fas fa-stopwatch text-danger me-2"></i>Registration Close</h5>
+                        <p class="small text-light mb-0">Last day to register & pay.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="glass-card text-center position-relative overflow-hidden border-primary">
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <span class="display-4 fw-bold text-primary">30</span>
+                            <div class="text-start ms-3 lh-1">
+                                <span class="d-block text-uppercase text-secondary fw-bold small">January</span>
+                                <span class="d-block text-white fw-bold">2026</span>
+                            </div>
+                        </div>
+                        <h5 class="text-white"><i class="fas fa-upload text-primary me-2"></i>Submission Deadline</h5>
+                        <p class="small text-light mb-0">Round 1 PDF Submission ends.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="glass-card text-center position-relative overflow-hidden border-warning">
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <span class="display-4 fw-bold text-warning">10</span>
+                            <div class="text-start ms-3 lh-1">
+                                <span class="d-block text-uppercase text-secondary fw-bold small">February</span>
+                                <span class="d-block text-white fw-bold">2026</span>
+                            </div>
+                        </div>
+                        <h5 class="text-white"><i class="fas fa-trophy text-warning me-2"></i>Grand Finale</h5>
+                        <p class="small text-light mb-0">Live Online Presentation.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h4 class="text-white border-bottom border-secondary d-inline-block pb-2">Focus Areas</h4>
+            </div>
+            <div class="row g-3">
+                <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="glass-card text-center p-3">
+                        <i class="fas fa-leaf fa-2x text-success mb-2"></i><h6 class="text-white mb-0">Environment</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="glass-card text-center p-3">
+                        <i class="fas fa-exclamation-triangle fa-2x text-warning mb-2"></i><h6 class="text-white mb-0">Disaster Alerts</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="glass-card text-center p-3">
+                        <i class="fas fa-graduation-cap fa-2x text-info mb-2"></i><h6 class="text-white mb-0">Education</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="glass-card text-center p-3">
+                        <i class="fas fa-heartbeat fa-2x text-danger mb-2"></i><h6 class="text-white mb-0">Healthcare</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-5 fw-bold"><i class="fas fa-sync-alt text-accent me-2"></i> How It Works</h2>
+                <p class="text-white opacity-75">A fully online journey from idea to impact.</p>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="phase-card">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="phase-badge text-primary border-primary">PHASE 01</div>
+                            <span class="text-primary small fw-bold"><i class="fas fa-laptop me-1"></i> ONLINE</span>
+                        </div>
+                        <h3 class="text-white mb-3">Round 1 – Idea Submission</h3>
+<p><strong>How to Submit Your Round 1 Idea:</strong> Upload your AI-based idea and solution (PDF or PPTX) to Google Drive, generate a shareable link, visit the website’s Submission section, click "Submit Link," and complete the Google Form with your link.</p>
+                        
+                        <div class="bg-dark bg-opacity-50 p-3 rounded mb-3 border border-secondary border-opacity-25">
+                            <h6 class="text-white"><i class="fas fa-file-pdf text-danger me-2"></i>PDF or PPTX Presentation Must Include:</h6>
+                            <ul class="custom-list list-unstyled mb-0 text-silver small">
+                                <li>The problem you want to solve.</li>
+                                <li>Your AI-based solution & real impact in BD.</li>
+                                <li>Optional: Basic implementation plan/tools.</li>
+                            </ul>
+                        </div>
+
+                        <h6 class="text-accent fw-bold small text-uppercase">Judging Criteria:</h6>
+                        <ul class="list-unstyled text-silver small mb-0">
+                            <li><i class="fas fa-check text-success me-2"></i>Relevance to fixed problem statement.</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Creativity & Originality.</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Potential Impact & Feasibility.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="phase-card" style="background: linear-gradient(160deg, rgba(30, 41, 59, 0.6) 0%, rgba(35, 10, 25, 0.9) 100%);">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="phase-badge text-secondary border-secondary">PHASE 02</div>
+                            <span class="text-secondary small fw-bold"><i class="fas fa-video me-1"></i> ONLINE</span>
+                        </div>
+                        <h3 class="text-white mb-3">Round 2 – Final Presentation</h3>
+                        <p>The <strong>Top 10 Teams</strong> will be selected. Selected teams must re-register (100 BDT fee) and join an online defense session.</p>
+                        
+                        <div class="bg-dark bg-opacity-50 p-3 rounded mb-3 border border-secondary border-opacity-25">
+                            <h6 class="text-white"><i class="fas fa-bullseye text-warning me-2"></i>What to Prepare:</h6>
+                            <ul class="custom-list list-unstyled mb-0 text-silver small">
+                                <li>Short, refined PowerPoint/PDF presentation.</li>
+                                <li>Clear answers to judges' questions.</li>
+                                <li>Strong justification for social impact.</li>
+                            </ul>
+                        </div>
+                         <p class="small text-muted fst-italic mb-0">*No working AI model required, but feasibility must be proven.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-7" data-aos="fade-up">
+                    <div class="glass-card">
+                        <h4 class="text-white mb-3"><i class="fas fa-trophy text-gold me-2"></i> Final Selection & Awards</h4>
+                        <p>Judges will evaluate all 10 teams. Top 3 winners awarded based on:</p>
+                        <div class="row text-center g-3 mb-3">
+                            <div class="col-4">
+                                <div class="p-2 border border-secondary rounded h-100">
+                                    <i class="fas fa-lightbulb text-warning mb-2"></i><br><span class="text-white small fw-bold">Innovation</span>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="p-2 border border-secondary rounded h-100">
+                                    <i class="fas fa-chart-line text-success mb-2"></i><br><span class="text-white small fw-bold">Impact</span>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="p-2 border border-secondary rounded h-100">
+                                    <i class="fas fa-microphone-alt text-info mb-2"></i><br><span class="text-white small fw-bold">Clarity</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="small text-silver mb-0"><i class="fas fa-certificate text-accent me-1"></i> <strong>Certificates</strong> given to all 10 finalists.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card">
+                        <h4 class="text-white mb-3"><i class="fas fa-user-check text-primary me-2"></i> Eligibility & Info</h4>
+                        <ul class="list-unstyled text-silver">
+                            <li class="mb-2"><i class="fas fa-angle-right text-primary me-2"></i><strong>Who:</strong> Undergraduate students enrolled in any BD university.</li>
+                            <li class="mb-2"><i class="fas fa-angle-right text-primary me-2"></i><strong>Team Size:</strong> 1 to 2 members per team.</li>
+                            <li class="mb-2"><i class="fas fa-angle-right text-primary me-2"></i><strong>Location:</strong> Fully Online (Anywhere).</li>
+                            <li class="mb-0"><i class="fas fa-angle-right text-primary me-2"></i><strong>AI Skill:</strong> Prior expertise NOT required.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="register" class="py-5 bg-dark position-relative">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <div class="glass-card border-danger h-100" style="background: rgba(220, 53, 69, 0.05);">
+                        <h3 class="text-danger mb-3"><i class="fas fa-exclamation-circle me-2"></i>Important Notice</h3>
+                        <h4 class="text-white mb-3">Limit: 100 Teams Only!</h4>
+                        <p class="text-light">Once 100 teams have registered, the form will be <strong>closed immediately</strong>.</p>
+                        <div class="alert alert-danger bg-danger bg-opacity-10 border-danger text-danger">
+                            <i class="fas fa-hourglass-half me-2"></i> <strong>Don't delay! Register now.</strong>
+                        </div>
+
+                            <h6 class="text-white border-bottom border-secondary pb-2 mb-3">🛑 Follow This Order:</h6>
+                            
+                            
+                                    <strong>Payment First:</strong> Send the registration fee <em>before</em> clicking the link. You need the <strong>TrxID</strong> to fill the form.
+                                
+                           
+                        <h5 class="text-white mt-4">Registration Deadline:</h5>
+                        <p class="text-danger fw-bold fs-4">January 25, 2026</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-7" data-aos="fade-left">
+                    <div class="glass-card">
+                        <h3 class="text-white mb-4">Registration Details</h3>
+                        <div class="d-flex flex-wrap gap-3 align-items-center mb-4">
+                            <span class="badge bg-primary fs-5">500 BDT <span class="fs-6 fw-light">/ Team</span></span>
+                            <span class="badge border border-light text-white fs-6 py-2"><i class="fas fa-users me-2"></i>Teams of 1-2 Members</span>
+                        </div>
+
+                        <h6 class="text-uppercase text-secondary fw-bold mb-3">Payment Methods (Send Money Only)</h6>
+                        
+                        <div class="payment-box">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-mobile-alt fa-lg text-secondary me-3"></i>
+                                <div><div class="text-silver small">bKash Personal</div><div class="text-white fw-bold fs-5">01540401193</div></div>
+                            </div>
+                            <button class="copy-btn" onclick="copyToClipboard('01540401193')"><i class="fas fa-copy me-2"></i>Copy</button>
+                        </div>
+                        <div class="payment-box">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-mobile-alt fa-lg text-warning me-3"></i>
+                                <div><div class="text-silver small">Nagad / Rocket</div><div class="text-white fw-bold fs-5">01893255503</div></div>
+                            </div>
+                            <button class="copy-btn" onclick="copyToClipboard('01893255503')"><i class="fas fa-copy me-2"></i>Copy</button>
+                        </div>
+                        
+<p class="small text-muted mb-3">Ref: <strong>AIHackathon – [Team Name]</strong></p>
+
+                        <div class="alert alert-warning bg-opacity-10 border-warning text-white p-3 mb-4 rounded-3" style="background: rgba(255, 193, 7, 0.1);">
+                            <div class="d-flex">
+                                <i class="fas fa-exclamation-triangle text-warning me-3 mt-1"></i>
+                                <div>
+                                    <strong class="text-warning">Crucial Requirement:</strong>
+                                    <p class="small text-silver mb-0 mt-1" style="line-height: 1.4;">
+                                        You MUST use the <strong>EXACT SAME Team Name</strong> for:
+                                        <br>1. Payment Reference
+                                        <br>2. Registration Form
+                                        <br>3. Phase 1 Idea Submission (Google Form)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="https://forms.gle/1QfLpfqP5B7NXSTm9" class="btn btn-glow w-100">
+                            <i class="fas fa-paper-plane me-2"></i> Proceed to Registration Form
+                        </a>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <section id="submission" class="py-5">
+        <div class="container">
+            <div class="glass-card border-primary position-relative overflow-hidden mb-5" data-aos="zoom-in">
+                
+                <div style="position: absolute; top: -50px; right: -50px; width: 300px; height: 300px; background: var(--primary); filter: blur(80px); opacity: 0.25; z-index: 0; pointer-events: none;"></div>
+                
+                <div class="row align-items-center text-center text-md-start position-relative" style="z-index: 2;">
+                    <div class="col-md-6 mb-4 mb-md-0">
+                        <h2 class="text-white mb-2">
+                            <i class="fab fa-google-drive text-success me-2"></i> Submit Your Solution
+                        </h2>
+                        <p class="text-light mb-0" style="opacity: 0.9;">
+                            Upload your AI-based idea (PDF or PPTX) via Google Drive. <br>
+                            <span class="text-warning small"><i class="fas fa-exclamation-circle me-1"></i> Set Drive link to <strong>'Anyone with the link'</strong>.</span>
+                        </p>
+                    </div>
+
+                    <div class="col-md-6 text-center text-md-end">
+                        
+                        <a href="demo-idea.html" target="_blank" class="btn btn-outline-light fw-bold rounded-pill px-4 py-3 shadow-lg me-2 mb-2 mb-md-0" style="transition: transform 0.3s ease; border-width: 2px;">
+                            <i class="fas fa-eye me-2"></i>View Demo
+                        </a>
+
+                        <a href="https://forms.gle/s1xRiZQMKaS1xbtB6" target="_blank" class="btn btn-light text-primary fw-bold rounded-pill px-5 py-3 shadow-lg mb-2 mb-md-0" style="transition: transform 0.3s ease; border: 2px solid white;">
+                            <i class="fas fa-paper-plane me-2"></i>Submit Link
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+            
+            
+        </div>
+    </section>
+
+    <section id="prizes" class="py-5" style="background: linear-gradient(180deg, transparent 0%, rgba(99, 102, 241, 0.05) 100%);">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold text-white"><i class="fas fa-trophy text-gold me-3"></i>Prize Pool</h2>
+            </div>
+            <div class="row g-4 justify-content-center align-items-end mb-5">
+                <div class="col-md-4 order-2 order-md-1" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card text-center p-4 border border-secondary">
+                        <i class="fas fa-medal fa-3x mb-3" style="color: #e2e8f0;"></i>
+                        <h4 class="text-white mb-0">1st Runner-up</h4>
+                        <div class="display-6 fw-bold my-3 text-white">15,000 BDT</div>
+                        <p class="small text-muted">Second best team</p>
+                    </div>
+                </div>
+                <div class="col-md-4 order-1 order-md-2" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card text-center p-5 border border-warning" style="background: linear-gradient(180deg, rgba(251, 191, 36, 0.1) 0%, rgba(30, 41, 59, 0.6) 100%); transform: scale(1.05);">
+                        <i class="fas fa-crown fa-4x mb-3 text-warning"></i>
+                        <h3 class="text-warning mb-0">CHAMPION</h3>
+                        <div class="display-4 fw-bold my-3 text-white">25,000 BDT</div>
+                        <p class="small text-white">Top performing team</p>
+                    </div>
+                </div>
+                <div class="col-md-4 order-3 order-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="glass-card text-center p-4 border border-danger">
+                        <i class="fas fa-medal fa-3x mb-3" style="color: #d97706;"></i>
+                        <h4 class="text-white mb-0">2nd Runner-up</h4>
+                        <div class="display-6 fw-bold my-3 text-white">10,000 BDT</div>
+                        <p class="small text-muted">Third best team</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <div class="glass-card text-center border-primary position-relative overflow-hidden">
+                        
+                        <div style="position: absolute; top: -50%; left: 50%; transform: translateX(-50%); width: 400px; height: 300px; background: var(--primary); filter: blur(120px); opacity: 0.2; pointer-events: none;"></div>
+                        
+                        <div class="position-relative" style="z-index: 2;">
+                            <div class="mb-3">
+                                <i class="fas fa-envelope-open-text fa-3x text-white" style="text-shadow: 0 0 20px var(--primary);"></i>
+                            </div>
+                            
+                            <h2 class="text-white mb-3">Have Any Queries?</h2>
+                            <p class="text-light mb-4" style="font-size: 1.1rem; opacity: 0.9;">
+                                We are here to guide you. For support, partnerships, or general questions, please drop us an email.
+                            </p>
+                            
+                            <a href="mailto:aihackathonofficial@gmail.com" class="btn btn-light text-primary fw-bold rounded-pill px-5 py-3 shadow-lg" style="border: 2px solid white; transition: 0.3s;">
+                                <i class="fas fa-paper-plane me-2"></i> aihackathonofficial@gmail.com
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <a class="navbar-brand mb-4 d-block" href="#">AI HACKATHON 2026</a>
+                    <p class="text-muted mb-4">Empowering innovators in Bangladesh to solve real-world problems through Artificial Intelligence.</p>
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="text-white me-2 small text-uppercase fw-bold">Presented By:</span>
+                        <span class="text-gradient fw-bold fs-5">IDEAL TECH LTD</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#how-it-works" class="text-muted text-decoration-none">How It Works</a></li>
+                        <li class="mb-2"><a href="#register" class="text-muted text-decoration-none">Registration</a></li>
+                        <li class="mb-2"><a href="rulebook.html" class="text-muted text-decoration-none">Rulebook</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="text-white mb-4">Connect</h5>
+                    <div class="d-flex gap-2 mb-4">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                    </div>
+                    <p class="small text-muted">Organized by <span class="text-white">Ideal Tech Ltd.</span></p>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25 my-5">
+            <p class="small text-muted text-center mb-0">&copy; 2026 Bangladesh National AI Hackathon. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 100, duration: 800 });
+        function copyToClipboard(text) { navigator.clipboard.writeText(text).then(() => { alert("Number copied: " + text); }); }
+        
+        const deadline = new Date('January 30, 2026 23:59:59').getTime();
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = deadline - now;
+            if (distance < 0) { clearInterval(timer); return; }
+            document.getElementById('days').innerText = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+            document.getElementById('hours').innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official Rulebook | AI Hackathon 2026</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- PREMIUM THEME VARIABLES --- */
+        :root {
+            --bg-dark: #020617;
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --accent: #06b6d4;
+            --glass: rgba(30, 41, 59, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-sub: #cbd5e1;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.1), transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.1), transparent 40%);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* --- GLASS DOCUMENT CONTAINER --- */
+        .doc-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .rule-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .rule-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* --- SIDEBAR NAVIGATION (STICKY) --- */
+        .toc-sidebar {
+            position: sticky;
+            top: 100px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .toc-link {
+            display: block;
+            color: var(--text-sub);
+            text-decoration: none;
+            padding: 8px 0;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            border-left: 2px solid transparent;
+            padding-left: 15px;
+        }
+
+        .toc-link:hover, .toc-link.active {
+            color: var(--accent);
+            border-left-color: var(--accent);
+            padding-left: 20px;
+        }
+
+        /* --- TYPOGRAPHY UTILS --- */
+        .section-title {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i { margin-right: 15px; color: var(--accent); }
+
+        .list-custom li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+            color: var(--text-sub);
+        }
+        .list-custom li::before {
+            content: '\f00c'; /* Check icon */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .text-gradient {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-print {
+            background: transparent;
+            border: 1px solid var(--text-sub);
+            color: var(--text-sub);
+            padding: 8px 20px;
+            border-radius: 50px;
+            transition: 0.3s;
+        }
+        .btn-print:hover { background: white; color: black; }
+
+        .copy-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: var(--accent);
+            padding: 2px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 991px) {
+            .toc-sidebar { display: none; } /* Hide sidebar on mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-dark fixed-top" style="background: rgba(2,6,23,0.95); border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-chevron-left me-2 text-primary"></i> Back to Main Site
+            </a>
+            <button onclick="window.print()" class="btn-print d-none d-md-block">
+                <i class="fas fa-print me-2"></i>Print / Save PDF
+            </button>
+        </div>
+    </nav>
+
+    <header class="py-5 mt-5 text-center">
+        <div class="container" data-aos="fade-down">
+            <span class="badge rounded-pill border border-light text-white mb-3 px-3 py-2">Version 1.0</span>
+            <h1 class="display-3 mb-3">Official Rulebook</h1>
+            <h4 class="text-secondary fw-light">Bangladesh National AI Hackathon 2026</h4>
+            <p class="text-sub mt-3">Please read all guidelines carefully before registering.</p>
+        </div>
+    </header>
+
+    <div class="container pb-5">
+        <div class="row">
+            
+            <div class="col-lg-3">
+                <div class="toc-sidebar">
+                    <h5 class="mb-3 text-white">Table of Contents</h5>
+                    <nav>
+                        <a href="#eligibility" class="toc-link">1. Eligibility & Team</a>
+                        <a href="#dates" class="toc-link">2. Important Dates</a>
+                        <a href="#round1" class="toc-link">3. Round 1 (Submission)</a>
+                        <a href="#round2" class="toc-link">4. Round 2 (Finale)</a>
+                        <a href="#submission" class="toc-link">5. How to Submit</a>
+                        <a href="#payment" class="toc-link">6. Registration & Payment</a>
+                        <a href="#prizes" class="toc-link">7. Prizes & Criteria</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                
+                <section id="eligibility" class="rule-card" data-aos="fade-up">
+                    <h3 class="section-title"><i class="fas fa-users-cog"></i> Eligibility & Team Structure</h3>
+                    <p>The competition is designed to foster innovation among students in Bangladesh.</p>
+                    <ul class="list-custom">
+                        <li><strong>Who can apply:</strong> Undergraduate students currently enrolled in any university across Bangladesh.</li>
+                        <li><strong>Team Size:</strong> Minimum 1 member, Maximum 2 members.</li>
+                        <li><strong>Location:</strong> The event is 100% Online. You can participate from anywhere.</li>
+                        <li><strong>Skill Level:</strong> Prior AI expertise is NOT required. We look for innovative ideas.</li>
+                    </ul>
+                    <div class="alert alert-danger bg-danger bg-opacity-10 border-danger text-white mt-3">
+                        <i class="fas fa-exclamation-triangle me-2"></i> <strong>Limit:</strong> Only the first 100 teams to register will be accepted.
+                    </div>
+                </section>
+
+                <section id="dates" class="rule-card" data-aos="fade-up">
+                    <h3 class="section-title"><i class="fas fa-calendar-alt"></i> Critical Timeline</h3>
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover border-secondary">
+                            <thead>
+                                <tr>
+                                    <th class="text-primary">Date</th>
+                                    <th class="text-white">Event</th>
+                                    <th class="text-sub">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="fw-bold">Jan 01, 2026</td>
+                                    <td>Registration Opens</td>
+                                    <td class="small">Online portal opens for team creation.</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold text-danger">Jan 25, 2026</td>
+                                    <td>Registration Closes</td>
+                                    <td class="small">Last day to register & pay fee.</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold text-warning">Jan 30, 2026</td>
+                                    <td>Round 1 Deadline</td>
+                                    <td class="small">Idea PDF/PPTX submission deadline.</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold text-success">Feb 10, 2026</td>
+                                    <td>Grand Finale</td>
+                                    <td class="small">Live online presentation (Round 2).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="round1" class="rule-card" data-aos="fade-up">
+                    <h3 class="section-title"><i class="fas fa-lightbulb"></i> Round 1: Idea Submission</h3>
+                    <p>This is a screening round. No coding is required yet.</p>
+                    <div class="bg-dark p-3 rounded border border-light border-opacity-10 mb-3">
+                        <h5 class="text-white">Requirements:</h5>
+                        <ul class="list-custom mb-0">
+                            <li>Create a presentation (PDF or PPTX).</li>
+                            <li><strong>Slide 1:</strong> Problem Statement (What are you solving?)</li>
+                            <li><strong>Slide 2:</strong> Proposed AI Solution.</li>
+                            <li><strong>Slide 3:</strong> Expected Real-world Impact in Bangladesh.</li>
+                            <li><strong>Optional:</strong> Tech stack or implementation plan.</li>
+                        </ul>
+                    </div>
+                    <p class="text-sub fst-italic">Note: You must choose one of the Focus Areas: Environment, Disaster Alerts, Education, or Healthcare.</p>
+                </section>
+
+                <section id="round2" class="rule-card" data-aos="fade-up">
+                    <h3 class="section-title"><i class="fas fa-video"></i> Round 2: Grand Finale</h3>
+                    <p>Only the <strong>Top 10 Teams</strong> from Round 1 will proceed to this stage.</p>
+                    <ul class="list-custom">
+                        <li>Selected teams will receive an email invitation.</li>
+                        <li><strong>Re-registration Fee:</strong> 100 BDT (Required for finalists).</li>
+                        <li><strong>Format:</strong> Live Online Defense (Zoom/Google Meet).</li>
+                        <li>Teams must answer questions from the judges regarding feasibility and impact.</li>
+                    </ul>
+                </section>
+
+                <section id="submission" class="rule-card" data-aos="fade-up">
+                    <h3 class="section-title"><i class="fab fa-google-drive"></i> Submission Guide</h3>
+                    <ol class="text-sub ps-3">
+                        <li class="mb-2">Prepare your idea file (PDF/PPTX).</li>
+                        <li class="mb-2">Upload the file to your personal <strong>Google Drive</strong>.</li>
+                        <li class="mb-2 text-warning"><strong>CRITICAL:</strong> Change the share setting to "Anyone with the link can view".</li>
+                        <li class="mb-2">Copy the link.</li>
+                        <li class="mb-2">Go to the website Submission section or use the Google Form provided.</li>
+                        <li>Paste your Drive link in the designated field.</li>
+                    </ol>
+                </section>
+
+                <section id="payment" class="rule-card" data-aos="fade-up">
+                    <h3 class="section-title"><i class="fas fa-wallet"></i> Registration & Payment</h3>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="h4 text-white mb-0 me-3">Fee: 500 BDT</div>
+                        <span class="badge bg-primary">Per Team</span>
+                    </div>
+                    <p>Send money to one of the numbers below <strong>BEFORE</strong> filling the form. You need the TrxID.</p>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="p-3 rounded" style="background: rgba(226, 30, 128, 0.1); border: 1px solid rgba(226, 30, 128, 0.3);">
+                                <h6 class="text-white">bKash (Personal)</h6>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="fs-5 fw-bold text-white">01540401193</span>
+                                    <button class="copy-btn" onclick="copyText('01540401193')">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 rounded" style="background: rgba(247, 148, 29, 0.1); border: 1px solid rgba(247, 148, 29, 0.3);">
+                                <h6 class="text-white">Nagad / Rocket</h6>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="fs-5 fw-bold text-white">01893255503</span>
+                                    <button class="copy-btn" onclick="copyText('01893255503')">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="prizes" class="rule-card" data-aos="fade-up">
+                    <h3 class="section-title"><i class="fas fa-trophy"></i> Prizes & Judging</h3>
+                    <div class="row text-center mb-4">
+                        <div class="col-md-4">
+                            <div class="p-3">
+                                <h1 class="text-gold mb-0">25k</h1>
+                                <small class="text-uppercase fw-bold text-white">Champion</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3">
+                                <h2 class="text-white mb-0">15k</h2>
+                                <small class="text-uppercase fw-bold text-sub">1st Runner Up</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3">
+                                <h3 class="text-bronze mb-0">10k</h3>
+                                <small class="text-uppercase fw-bold text-sub">2nd Runner Up</small>
+                            </div>
+                        </div>
+                    </div>
+                    <h6 class="text-white">Judging Criteria:</h6>
+                    <ul class="list-unstyled d-flex gap-3 flex-wrap">
+                        <li class="badge bg-dark border border-secondary p-2">Innovation</li>
+                        <li class="badge bg-dark border border-secondary p-2">Social Impact</li>
+                        <li class="badge bg-dark border border-secondary p-2">Presentation Clarity</li>
+                        <li class="badge bg-dark border border-secondary p-2">Feasibility</li>
+                    </ul>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+ <footer class="py-4 text-center border-top border-secondary border-opacity-25" style="background: #010409;">
+    <p class="small text-white mb-0">&copy; 2026 Bangladesh National AI Hackathon.</p>
+    <p class="small text-white">Presented by <span class="text-white">Ideal Tech Ltd.</span></p>
+</footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 800 });
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Number copied: " + text);
+            });
+        }
+    </script>
+</body>
+</html>
